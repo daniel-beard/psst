@@ -21,9 +21,11 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    
+    # | tar xzvf - -C julia/
 
     - name: Download julia tar
-      run: mkdir -p julia; curl -s https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.0-linux-x86_64.tar.gz | tar xzvf - -C julia/
+      run: mkdir -p julia; curl -s https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.0-linux-x86_64.tar.gz
       shell: bash
     - name: Link julia to /usr/local/bin
       run: sudo ln -s "$(pwd)"/julia/julia-1.4.0/bin/julia /usr/local/bin/julia
