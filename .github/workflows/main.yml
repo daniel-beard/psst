@@ -21,16 +21,15 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+    
+    # | tar xzvf - -C julia/
 
-    # Runs a set of commands using the runners shell
-    - name: Install Julia
-      run: |
-        mkdir -p julia;
-        curl -s https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.0-linux-x86_64.tar.gz | tar xzvf - -C julia/;
-        sudo ln -s "$(pwd)"/julia/julia-1.4.0/bin/julia /usr/local/bin/julia
+    - name: Download julia tar
+      run: mkdir -p julia; curl -s https://julialang-s3.julialang.org/bin/linux/x64/1.4/julia-1.4.0-linux-x86_64.tar.gz
       shell: bash
-      
-    - name: Canary job (for now). TODO Setup tests!
-      run: |
-        cd "$GITHUB_WORKSPACE" && echo "hello world" | julia psst.jl words
-        
+    - name: Link julia to /usr/local/bin
+      run: sudo ln -s "$(pwd)"/julia/julia-1.4.0/bin/julia /usr/local/bin/julia
+      shell: bash
+    - name: Run canary job
+      run: 'echo "hello world" | julia "$GITHUB_WORKSPACE"/src/psst.jl words'
+      shell: bash
