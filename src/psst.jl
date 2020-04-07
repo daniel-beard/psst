@@ -32,6 +32,9 @@ words(s::AbstractString) = split(s, " ")
 escape(s::AbstractString) = escape_string(s)
 unescape(s::AbstractString) = unescape_string(s)
 
+# "hello world" -> "hElLo wOrLd". Picks random starting case.
+spongebob(s::AbstractString) = (c = Bool(rand(Bool, 1)[1]); map(x-> begin c = !c; (c == true ? uppercase(x) : lowercase(x)) end, s))
+
 # Search / Matching
 Base.match(r::Regex) = x -> map(String, match(r, x).captures)
 
@@ -39,7 +42,18 @@ Base.match(r::Regex) = x -> map(String, match(r, x).captures)
 # End extra functions
 #-----------------------------------------------------------------------
 
-function parseall(str)
+#-----------------------------------------------------------------------
+# Pretty print for types
+#-----------------------------------------------------------------------
+
+# SubString arrays, should print as: "first", "second", "third"
+Base.show(io::IO, str::Array{SubString{String}}) = join(map(x->"\"$x\"", str), ", ") |> println
+
+#-----------------------------------------------------------------------
+# End pretty print for types
+#-----------------------------------------------------------------------
+
+function parseall(input, str)
   return Meta.parse("begin \"$(escape_string(input))\" |> $str |> println end").args
 end
 
@@ -58,10 +72,11 @@ function julia_main()::Cint
 
   # Just prepending the pipeline from input here, make more robust later.
   cmd_str = ARGS[1]
-  exprs = parseall(cmd_str)
-  println("Exprs: $(exprs)")
+  exprs = parseall(input, cmd_str)
+  #println("Exprs: $(exprs)")
   for expr in exprs; Core.eval(psst, expr);  end
   return 0 # if things finished successfully
 end
+julia_main()
 
 end # module
