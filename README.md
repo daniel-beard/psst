@@ -13,4 +13,16 @@ $ echo "one two three four" | psst 'words |> take(2)'
 "one", "two"
 ```
 
+Validate JSON
 
+```bash
+$ psst 'parseJSON |> pp'
+{
+  "an_array": [
+    "string",
+    9
+  ],
+  "a_number": 5.0
+}
+nothing
+```
