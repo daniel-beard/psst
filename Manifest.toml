@@ -41,9 +41,9 @@ uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[Expat_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "e1b4190be75ba8d03ce2bec3a6cfc7a939c713ea"
+git-tree-sha1 = "def36fdc72dc7a9953673cf5492588ef3d79139c"
 uuid = "2e619515-83b5-522b-bb60-26c02a35a201"
-version = "2.2.7+0"
+version = "2.2.7+3"
 
 [[HTTPClient]]
 deps = ["Compat", "LibCURL"]
@@ -54,6 +54,12 @@ version = "0.2.1"
 [[InteractiveUtils]]
 deps = ["Markdown"]
 uuid = "b77e0a4c-d291-57a0-90e8-8db25a27a240"
+
+[[JSON]]
+deps = ["Dates", "Mmap", "Parsers", "Unicode"]
+git-tree-sha1 = "b34d7cef7b337321e97d22242c3c2b91f476748e"
+uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+version = "0.21.0"
 
 [[LibCURL]]
 deps = ["BinaryProvider", "Libdl"]
@@ -68,6 +74,7 @@ uuid = "522f3ed2-3f36-55e3-b6df-e94fee9b0c07"
 version = "0.6.1"
 
 [[LibGit2]]
+deps = ["Printf"]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 
 [[Libdl]]
@@ -99,8 +106,14 @@ git-tree-sha1 = "2a9f7f6769d3fe87b128a6cdba81307962ed977f"
 uuid = "9b87118b-4619-50d2-8e1e-99f35a4d4d9d"
 version = "0.6.5"
 
+[[Parsers]]
+deps = ["Dates", "Test"]
+git-tree-sha1 = "20ef902ea02f7000756a4bc19f7b9c24867c6211"
+uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
+version = "1.0.6"
+
 [[Pkg]]
-deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Test", "UUIDs"]
+deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[Printf]]

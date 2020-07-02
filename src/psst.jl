@@ -5,6 +5,7 @@ using InteractiveUtils
 using Base64
 using SHA
 using Base
+using JSON
 
 #-----------------------------------------------------------------------
 # Composable map and filter
@@ -28,7 +29,7 @@ sha256(s::AbstractString) = SHA.sha256(s) |> bytes2hex
 base64(s::AbstractString) = Base64.base64encode(s)
 
 # String transforms
-words(s::AbstractString) = split(s, " ")
+words(s::AbstractString) = split(s, " ") |> map(String)
 escape(s::AbstractString) = escape_string(s)
 unescape(s::AbstractString) = unescape_string(s)
 
@@ -37,6 +38,17 @@ spongebob(s::AbstractString) = (c = Bool(rand(Bool, 1)[1]); map(x-> begin c = !c
 
 # Search / Matching
 Base.match(r::Regex) = x -> map(String, match(r, x).captures)
+
+# Iterators
+take(n::Integer) = iter -> Base.Iterators.take(iter, n) |> collect
+
+# Debugging
+type(t) = "$(typeof(t))"
+
+# JSON
+parseJSON(s::AbstractString) = JSON.parse(s)
+toJSON(s::Any) = JSON.json(s)
+#TODO: Add pretty print here
 
 #-----------------------------------------------------------------------
 # End extra functions
@@ -48,6 +60,7 @@ Base.match(r::Regex) = x -> map(String, match(r, x).captures)
 
 # SubString arrays, should print as: "first", "second", "third"
 Base.show(io::IO, str::Array{SubString{String}}) = join(map(x->"\"$x\"", str), ", ") |> println
+Base.show(io::IO, str::Array{String}) = join(map(x->"\"$x\"", str), ", ") |> println
 
 #-----------------------------------------------------------------------
 # End pretty print for types
