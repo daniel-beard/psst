@@ -50,6 +50,9 @@ parseJSON(s::AbstractString) = JSON.parse(s)
 toJSON(s::Any) = JSON.json(s)
 pp(s::AbstractDict) = JSON.print(s, 2)
 
+# Dictionary operations
+get(key) = function(collection) Base.get(collection, key, nothing) end
+
 #-----------------------------------------------------------------------
 # End extra functions
 #-----------------------------------------------------------------------
