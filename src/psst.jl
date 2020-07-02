@@ -48,6 +48,7 @@ type(t) = "$(typeof(t))"
 # JSON
 parseJSON(s::AbstractString) = JSON.parse(s)
 toJSON(s::Any) = JSON.json(s)
+#TODO: Update to make this pass-through. i.e. pretty print then return the nice string itself
 pp(s::AbstractDict) = JSON.print(s, 2)
 
 # Dictionary operations
