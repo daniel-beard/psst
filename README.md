@@ -9,7 +9,7 @@ hElLo wOrLd
 ```
 
 ```bash
-$ echo "one two three four" | psst 'words |> take(2)'        
+$ echo "one two three four" | psst 'words |> take(2)'
 "one", "two"
 ```
 

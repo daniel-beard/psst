@@ -28,6 +28,7 @@ Base.filter(f) = function(data...) filter(f, data...) end
 # Encodings
 sha256(s::AbstractString) = SHA.sha256(s) |> bytes2hex
 base64(s::AbstractString) = Base64.base64encode(s)
+unbase64(s::AbstractString) = String(Base64.base64decode(s))
 
 # String transforms
 words(s::AbstractString) = split(s, " ") |> map(String)
@@ -52,6 +53,8 @@ path(u::HTTP.URIs.URI)::AbstractString = u.path
 query(u::HTTP.URIs.URI)::AbstractString = u.query
 fragment(u::HTTP.URIs.URI)::AbstractString = u.fragment
 queryParams(u::HTTP.URIs.URI)::Dict = HTTP.queryparams(u)
+escapeURL(s::AbstractString) = HTTP.URIs.escapeuri(s)
+unescapeURL(s::AbstractString) = HTTP.URIs.unescapeuri(s)
 isValid(u::HTTP.URIs.URI) = Base.isvalid(u)
 
 # Debugging
