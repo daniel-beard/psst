@@ -6,6 +6,7 @@ using Base64
 using SHA
 using Base
 using JSON
+using HTTP
 
 #-----------------------------------------------------------------------
 # Composable map and filter
@@ -41,6 +42,17 @@ Base.match(r::Regex) = x -> map(String, match(r, x).captures)
 
 # Iterators
 take(n::Integer) = iter -> Base.Iterators.take(iter, n) |> collect
+
+# HTTP / URI
+parseURL(s::AbstractString)::HTTP.URIs.URI = parse(HTTP.URIs.URI, s)
+scheme(u::HTTP.URIs.URI)::AbstractString = u.scheme
+host(u::HTTP.URIs.URI)::AbstractString = u.host
+port(u::HTTP.URIs.URI)::AbstractString = u.port
+path(u::HTTP.URIs.URI)::AbstractString = u.path
+query(u::HTTP.URIs.URI)::AbstractString = u.query
+fragment(u::HTTP.URIs.URI)::AbstractString = u.fragment
+queryParams(u::HTTP.URIs.URI)::Dict = HTTP.queryparams(u)
+isValid(u::HTTP.URIs.URI) = Base.isvalid(u)
 
 # Debugging
 type(t) = "$(typeof(t))"
