@@ -26,3 +26,15 @@ $ psst 'parseJSON |> pp'
 }
 nothing
 ```
+
+URLs
+
+Examples assume `"http://test.com?foo=bar&anotherParam=baz"` is in the pasteboard.
+
+```bash
+# Check if valid
+$ psst 'parseURL |> isValid'
+# Extract query param
+$ psst 'parseURL |> queryParams |> get("anotherParam")'
+baz
+```
