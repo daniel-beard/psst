@@ -1,12 +1,13 @@
 module psst
 
 # For clipboard read
-using InteractiveUtils
-using Base64
-using SHA
 using Base
-using JSON
+using Base64
 using HTTP
+using InteractiveUtils
+using JSON
+using MD5
+using SHA
 
 #-----------------------------------------------------------------------
 # Composable map and filter
@@ -26,6 +27,8 @@ Base.filter(f) = function(data...) filter(f, data...) end
 #-----------------------------------------------------------------------
 
 # Encodings
+md5(s::AbstractString) = MD5.md5(s) |> bytes2hex
+sha1(s::AbstractString) = SHA.sha1(s) |> bytes2hex
 sha256(s::AbstractString) = SHA.sha256(s) |> bytes2hex
 base64(s::AbstractString) = Base64.base64encode(s)
 unbase64(s::AbstractString) = String(Base64.base64decode(s))
