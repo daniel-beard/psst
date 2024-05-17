@@ -37,6 +37,7 @@ unbase64(s::AbstractString) = String(Base64.base64decode(s))
 words(s::AbstractString) = split(s, " ") |> map(String)
 escape(s::AbstractString) = escape_string(s)
 unescape(s::AbstractString) = unescape_string(s)
+inspect(s::AbstractString) = foreach(c -> repr("text/plain", c) |> println, s)
 
 # "hello world" -> "hElLo wOrLd". Picks random starting case.
 spongebob(s::AbstractString) = (c = Bool(rand(Bool, 1)[1]); map(x-> begin c = !c; (c == true ? uppercase(x) : lowercase(x)) end, s))
